@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinjaman Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(potouas.jpg);
+            background-size: contain; /* Menyesuaikan ukuran gambar dengan layar */
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color:  #696a6c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: grey;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2e3e5;
+            border-radius: 5px;
+        }
+        footer {
+        text-align: center;
+        padding: 20px 0;
+        background: #696a6c; /* Warna latar belakang footer */
+        color: #fff; /* Warna teks footer */
+        width: 100%;
+        margin-top: 110px;
+    }
+    footer a {
+        color: #fff; /* Warna tautan di footer */
+        text-decoration: underline; 
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Form Pengajuan Pinjaman</h1>
+        <form id="loanForm">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" required>
+
+            <label for="amount">Jumlah Pinjaman:</label>
+            <input type="number" id="amount" required>
+
+            <label for="duration">Durasi (bulan):</label>
+            <input type="number" id="duration" required>
+
+            <label for="interestRate">Suku Bunga (% per tahun):</label>
+            <input type="number" id="interestRate" required>
+
+            <button type="submit">Ajukan Pinjaman</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <footer>
+        <p>Hubungi Kami: 123-0408-1813 | apriliariana066@gmail.com</p>
+            <p>&copy; 202 Pinjaman Online. Semua Hak Dilindungi.</p>
+     </footer>
+    <script>
+        document.getElementById('loanForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const duration = parseInt(document.getElementById('duration').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value) / 100; // Mengubah persen ke desimal
+
+            // Contoh perhitungan bunga (misalnya 5% per bulan)
+
+            const totalInterest = amount * interestRate * (duration / 12); // Bunga total
+            const totalAmount = amount + (amount * interestRate * duration);
+            const monthlyPayment = totalAmount / duration;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h3>Hasil Pengajuan Pinjaman</h3>
+                <p>Nama: ${name}</p>
+                <p>Jumlah Pinjaman: Rp${amount.toFixed(2)}</p>
+                <p>Durasi: ${duration} bulan</p>
+                <p>Total yang harus dibayar: Rp${totalAmount.toFixed(2)}</p>
+                <p>Pembayaran Bulanan: Rp${monthlyPayment.toFixed(2)}</p>
+                <p>Suku Bunga: ${interestRate * 100}% per tahun</p> 
+            `;
+        });
+    </script>
+</body>
+</html>
